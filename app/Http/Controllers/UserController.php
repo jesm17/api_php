@@ -66,6 +66,9 @@ class UserController extends Controller
         $user->city = $request->city;
         $user->birthdate = $request->birthdate;
 
+        $id = User::lates('id')->first();
+        DB::insert('INSERT INTO additional_infos (user_id) VALUES (?)', [$id]);
+
         $user->save();
 
         return response()->json(['message' => 'Usuario creado con exito', 'status' => Response::HTTP_CREATED]);
